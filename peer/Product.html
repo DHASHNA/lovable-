@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Administretor</title>
+
+    <!-- css file -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- boostrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+
+<!-- firebasr storage for image store ----->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+
+<!-- real time database -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDwxZlsak2DSnMkZX6ztKFBIPDf0HBXNtk",
+    authDomain: "lovable-5494f.firebaseapp.com",
+    databaseURL: "https://lovable-5494f-default-rtdb.firebaseio.com",
+    projectId: "lovable-5494f",
+    storageBucket: "lovable-5494f.appspot.com",
+    messagingSenderId: "977088675934",
+    appId: "1:977088675934:web:93c887fdb1e4e6094ab4cf"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="top-bar">
+      <h3></h3>
+      <h3>Admin</h3>
+      <button id="logOut">Log Out</button>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12 upg-pro" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h4>upload Product</h4>
+              <button class="upl-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Upload files</button>
+            </div>
+            <div>
+              <button class="orders-btn">Orders</button>
+            </div>
+         </div>
+      </div>
+    <div class="row">
+      <div class="col-md-12 upd-pro">
+        <h4>uploaded Products</h4>
+        
+        <input type="text" id="unique_id" hidden>
+
+      <table id="table">
+        <h5 style="color:green">Frames</h5>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Image Url</th>
+        <th>Price</th>
+        <th>Options</th>
+        <tbody id="frame-body">
+        </tbody>
+      </table>
+      <br>
+      <table id="table">
+        <h5 style="color:rgb(0, 19, 128)">Gifts Collection</h5>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Image Url</th>
+        <th>Price</th>
+        <th>Options</th>
+        <tbody id="Gift-body">
+        </tbody>
+      </table>
+<br>
+      <table id="table">
+        <h5 style="color:rgb(100, 8, 93)">Craft Collection</h5>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Image Url</th>
+        <th>Price</th>
+        <th>Options</th>
+        <tbody id="Craft-body">
+        </tbody>
+      </table>
+
+
+
+
+      </div>
+   
+    </div>
+
+    <!-- popup -->
+    <div
+    class="modal fade"
+    id="staticBackdrop2"
+    data-bs-backdrop="static"
+    data-bs-keyboard="true"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="cont-modal">
+          <div class="modal-body" > 
+
+            <div class="modal-header">
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">X</button>
+            </div>
+           <div class="upload-files">
+             <p style="text-align: center">File Details</p>
+             <div id="imgscr"></div>
+           </div>
+         <div class="detail-cont" id="content-wrap">
+           <div class="div" style="display: flex; flex-direction: column; margin:10px;">
+           <input type="file" name="file" id="image-file" accept="image/*">
+           <progress value="0" max="100" id="progress"></progress>
+          </div>
+           <input type="text" name="ProtuctName" id="productName" placeholder="Product name">
+           <input type="text" name="priceProduct" id="priceProduct" placeholder="price">
+           <textarea name="Description" id="Description" cols="30" rows="7" placeholder="Description"></textarea>
+        <div>
+           <select name="catagory" id="catagory">
+             <option value="default">Select catagory</option>
+             <option value="Frames">Frames</option>
+             <option value="gifts">Gifts</option>
+             <option value="handCraft">Hand Craft</option>
+           </select>
+         </div>
+        </div>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="upload">Upload</button>
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onclick="save_change()" id="save_change" hidden>Save Change</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+
+
+  <!-- js file -->
+  <script src="js/upload.js"></script>
+
+   <!-- boostrap js -->
+   <script
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+   crossorigin="anonymous"
+ ></script>
+ <script
+   src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+   integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+   crossorigin="anonymous"
+ ></script>
+ <script
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+   integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+   crossorigin="anonymous"
+ ></script>
+
+  </body>
+</html>
